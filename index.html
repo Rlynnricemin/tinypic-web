@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>中信银行信用卡</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta content="telephone=no" name="format-detection" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <script src='./tinypic.js'></script>
+  </head>
+  <body>
+      <input type='file' onchange="upload(this)"/>
+      <script>
+        function upload(obj) {
+          new Tinypic({
+              file: obj.files[0], 
+              type: 'base64',
+              limitsize: 50 * 1024,
+              callback: (res) => {
+                  console.log(res)
+              }
+          })
+        }
+      </script>
+  </body>
+</html>
