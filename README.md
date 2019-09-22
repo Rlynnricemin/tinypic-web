@@ -6,7 +6,7 @@ Install
 --------------------------------------
 
 ```
-npm install tinypic --save
+npm install tinypic-web --save
 ```
 How to Use
 --------------------------------------
@@ -14,7 +14,7 @@ How to Use
 new TinyPic({
   file: new File(),
   type: 'file', // file or base64
-  limitsize: 100 * 1024,
+  limitsize: 100 * 1024, // 允许上传的文件大小
   callback: function(file) {
     return file
   }

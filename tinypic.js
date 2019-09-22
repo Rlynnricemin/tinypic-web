@@ -96,8 +96,6 @@
                 getCompressFile.call(this, canvas, resultdatamore.data)
             } else {
                 var resdata = this.type === 'file'? resultdatamore.data : resultdatamore.base64
-                var image = new Image()
-                image.src = resdata
                 this.callback(resdata)
             }
         }
@@ -118,9 +116,7 @@
     }
 
     // export results
-    if(typeof define === 'function' && define.amd) {
-        define(Tinypic);
-    } else if (typeof module !== 'undefined') {
+    if (typeof module !== 'undefined') {
         module.exports = Tinypic;
     } else {
         window.Tinypic = Tinypic;
