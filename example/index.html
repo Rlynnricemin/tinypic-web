@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>中信银行信用卡</title>
+    <title>Tinypic</title>
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
     <meta content="telephone=no" name="format-detection" />
@@ -12,18 +12,50 @@
     <script src='../tinypic.min.js'></script>
   </head>
   <body>
-      <input type='file' onchange="upload(this)"/>
+      <label>uploadFile: </label></label><input type='file' onchange="upload(this)"/>
+      <label>limitSize: </label><input id="size" type='number' value="51200" style='border-radius: 3px;margin-left: 30px;'/>b
+      <button id="start" type='submit'>Start</button>
+      <div id="showarea" style="margin-top: 20px"></div>
       <script>
-        function upload(obj) {
-          new Tinypic({
-              file: obj.files[0], 
-              type: 'base64',
-              limitsize: 50 * 1024,
-              callback: (res) => {
-                  console.log(res)
-              }
+        (function(w){
+          var originFile = null
+          var showdom = document.getElementById('showarea')
+          function upload(obj) {
+            originFile = obj.files[0]
+          }
+          function renderdom(opt) {
+            var newdom = document.createElement('div')
+            newdom.innerHTML = `<p>${opt.name}</p>`
+            newdom.appendChild(opt.img);
+            showdom.appendChild(newdom);
+          }
+          function startTiny() {
+            var limitsize = document.getElementById('size').value
+            new Tinypic({
+                file: originFile, 
+                type: 'base64',
+                limitsize: +limitsize,
+                callback: (res) => {
+                  var tinyimg = new Image()
+                  tinyimg.src = res
+                  renderdom({name: 'tiny: ', img: tinyimg});
+                }
+            })
+            var newimg = new Image()
+            var _reader = new FileReader();
+            _reader.readAsDataURL(originFile);
+            _reader.onload = () => {
+              newimg.src = _reader.result;
+            }
+            renderdom({name: 'Origin: ', img: newimg});
+          }
+          w.upload = upload
+
+          document.getElementById('start').addEventListener('click', () => {
+            showdom.innerHTML = ''
+            startTiny()
           })
-        }
+        })(window)
       </script>
   </body>
 </html>

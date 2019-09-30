@@ -20,3 +20,11 @@ new TinyPic({
   }
 })
 ```
+
+PreView
+--------------------------------------
+![image](https://rlynnricemin.github.io/tinypic-web/example/viewpic.png)
+
+Demo
+--------------------------------------
+[link](https://rlynnricemin.github.io/tinypic-web/example/index.html)
